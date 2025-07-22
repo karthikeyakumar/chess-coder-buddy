@@ -4,7 +4,10 @@ import { ChatInput } from "./ChatInput";
 import { ChatMessage } from "./ChatMessage";
 import { VoiceToggle } from "./VoiceToggle";
 import { ChessBoard } from "./ChessBoard";
-import { Crown } from "lucide-react";
+import { ApiKeySetup } from "./ApiKeySetup";
+import { Crown, Settings } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ChezziAI } from "@/lib/chezzi-ai";
 
 interface Message {
   id: string;
@@ -24,6 +27,9 @@ export const ChatInterface = () => {
   ]);
   const [isVoiceEnabled, setIsVoiceEnabled] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [showApiSetup, setShowApiSetup] = useState(false);
+  const [currentPosition, setCurrentPosition] = useState<{ fen?: string; pgn?: string }>({});
+  const [chezziAI] = useState(() => new ChezziAI());
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -46,23 +52,34 @@ export const ChatInterface = () => {
     setMessages(prev => [...prev, userMessage]);
     setIsTyping(true);
 
-    // Simulate AI response (replace with actual OpenAI integration)
-    setTimeout(() => {
+    try {
+      // Use ChezziAI for intelligent responses
+      const response = await chezziAI.getChatResponse(content, currentPosition);
+      
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
         type: "ai",
-        content: generateChezziResponse(content),
+        content: response,
         timestamp: new Date()
       };
       
       setMessages(prev => [...prev, aiResponse]);
-      setIsTyping(false);
-
+      
       // Text-to-speech if enabled
       if (isVoiceEnabled) {
         speakText(aiResponse.content);
       }
-    }, 1000 + Math.random() * 2000);
+    } catch (error) {
+      console.error('AI response error:', error);
+      setMessages(prev => [...prev, {
+        id: (Date.now() + 1).toString(),
+        type: "ai",
+        content: "Oops! Looks like I hit a null pointer exception. Let me try that again... 🐛",
+        timestamp: new Date()
+      }]);
+    }
+    
+    setIsTyping(false);
   };
 
   const generateChezziResponse = (userInput: string): string => {
@@ -143,7 +160,11 @@ export const ChatInterface = () => {
 
       {/* Chess Board Section */}
       <div className="lg:col-span-1">
-        <ChessBoard />
+        <ChessBoard onPositionChange={(fen, pgn) => {
+          // Update Chezzi with the new position
+          const positionMessage = `*Position updated: ${fen}*\n\nPGN: ${pgn}`;
+          // Could trigger analysis here
+        }} />
       </div>
     </div>
   );
