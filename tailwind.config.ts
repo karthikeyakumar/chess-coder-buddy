@@ -52,6 +52,17 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				chess: {
+					light: 'hsl(var(--chess-light))',
+					dark: 'hsl(var(--chess-dark))',
+					'board-light': 'hsl(var(--chess-board-light))',
+					'board-dark': 'hsl(var(--chess-board-dark))'
+				},
+				chat: {
+					user: 'hsl(var(--chat-user))',
+					ai: 'hsl(var(--chat-ai))',
+					bubble: 'hsl(var(--chat-bubble))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -84,11 +95,39 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'bounce-gentle': {
+					'0%, 100%': {
+						transform: 'translateY(0)',
+						animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)'
+					},
+					'50%': {
+						transform: 'translateY(-2px)',
+						animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)'
+					}
+				},
+				'typing': {
+					'0%': { opacity: '0.4' },
+					'50%': { opacity: '1' },
+					'100%': { opacity: '0.4' }
+				},
+				'slide-up': {
+					'0%': {
+						transform: 'translateY(10px)',
+						opacity: '0'
+					},
+					'100%': {
+						transform: 'translateY(0)',
+						opacity: '1'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'bounce-gentle': 'bounce-gentle 1s infinite',
+				'typing': 'typing 1.5s ease-in-out infinite',
+				'slide-up': 'slide-up 0.3s ease-out'
 			}
 		}
 	},

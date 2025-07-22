@@ -2,39 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Chess Coach Design System - Warm, chess-themed with coder aesthetics */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 43 23% 96%;
+    --foreground: 30 25% 8%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 43 23% 98%;
+    --card-foreground: 30 25% 8%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 43 23% 98%;
+    --popover-foreground: 30 25% 8%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 33 82% 45%;
+    --primary-foreground: 43 23% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 43 23% 88%;
+    --secondary-foreground: 30 25% 8%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 43 23% 90%;
+    --muted-foreground: 30 12% 42%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 195 100% 35%;
+    --accent-foreground: 43 23% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 43 23% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 43 23% 85%;
+    --input: 43 23% 90%;
+    --ring: 33 82% 45%;
+
+    /* Chess-specific colors */
+    --chess-light: 43 45% 85%;
+    --chess-dark: 30 25% 25%;
+    --chess-board-light: 43 35% 92%;
+    --chess-board-dark: 33 30% 35%;
+    
+    /* Chat colors */
+    --chat-user: 195 100% 35%;
+    --chat-ai: 33 82% 45%;
+    --chat-bubble: 43 23% 95%;
+    
+    /* Gradient definitions */
+    --gradient-chess: linear-gradient(135deg, hsl(var(--chess-light)), hsl(var(--chess-dark)));
+    --gradient-warm: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    
+    /* Animation variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-chess: 0 10px 30px -10px hsl(var(--chess-dark) / 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.2);
 
     --radius: 0.5rem;
 
